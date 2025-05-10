@@ -1,9 +1,15 @@
+import { Button, IconButton } from '@/components/Button';
+
 export default function Home() {
   return (
-    <div>
+    <main>
       <h1 className='m-3 bg-gray-100 p-12 font-bold text-red-500'>
         daikoku infomation
       </h1>
-    </div>
+      <div className='flex gap-8 p-12'>
+        <Button />
+        <IconButton />
+      </div>
+    </main>
   );
 }
