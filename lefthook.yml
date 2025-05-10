@@ -2,6 +2,6 @@ pre-commit:
   parallel: true
   commands:
     check:
-      run: bunx biome check --write {staged_files}
+      run: bun run check {staged_files}
     build:
       run: bun run build
