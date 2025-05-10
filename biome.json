@@ -2,8 +2,8 @@
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "vcs": {
     "enabled": true,
-  	"clientKind": "git",
-  	"useIgnoreFile": true
+    "clientKind": "git",
+    "useIgnoreFile": true
   },
   "files": {
     "ignoreUnknown": false,
@@ -24,11 +24,11 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-			"correctness": {
+      "correctness": {
         "noUnusedImports": "warn",
-				"noUnusedVariables": "warn"
+        "noUnusedVariables": "warn"
       },
-			"nursery": { "useSortedClasses": "warn" }
+      "nursery": { "useSortedClasses": "warn" }
     }
   },
   "javascript": {
