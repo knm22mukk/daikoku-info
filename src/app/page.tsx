@@ -1,4 +1,5 @@
 import { Button, IconButton } from '@/components/Button';
+import SectionHeader from '@/components/SectionHeader';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <Button />
         <IconButton />
       </div>
+      <SectionHeader />
     </main>
   );
 }
