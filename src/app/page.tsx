@@ -1,4 +1,5 @@
 import { Button, IconButton } from '@/components/Button';
+import Card from '@/components/Card';
 import SectionHeader from '@/components/SectionHeader';
 
 export default function Home() {
@@ -12,6 +13,9 @@ export default function Home() {
         <IconButton />
       </div>
       <SectionHeader />
+      <div className='mx-auto max-w-screen-2xl'>
+        <Card />
+      </div>
     </main>
   );
 }
