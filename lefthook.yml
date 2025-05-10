@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  commands:
+    check:
+      run: bun run check {staged_files}
+    build:
+      run: bun run build
