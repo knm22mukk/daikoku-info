@@ -1,5 +1,6 @@
 import { Button, IconButton } from '@/components/Button';
 import Card from '@/components/Card';
+import PageLinks from '@/components/PageLinks';
 import SectionHeader from '@/components/SectionHeader';
 
 export default function Home() {
@@ -15,6 +16,10 @@ export default function Home() {
       <SectionHeader />
       <div className='mx-auto max-w-screen-2xl'>
         <Card />
+      </div>
+      <SectionHeader />
+      <div className='mx-auto max-w-screen-2xl'>
+        <PageLinks />
       </div>
     </main>
   );
