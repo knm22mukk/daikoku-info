@@ -18,7 +18,7 @@ export const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
-export type Info = {
+export type Tutorial = {
   title: string;
   description: string;
   body: string;
@@ -31,22 +31,26 @@ export type Category = {
 } & MicroCMSContentId &
   MicroCMSDate;
 
-//Infomation記事の一覧を取得
-export const getInfoList = async (queries?: MicroCMSQueries) => {
-  const listData = await client.getList<Info>({
-    endpoint: 'informations',
+//tutorial記事の一覧を取得
+export const getTutorialList = async (
+  endpoint: string,
+  queries?: MicroCMSQueries,
+) => {
+  const listData = await client.getList<Tutorial>({
+    endpoint,
     queries,
   });
   return listData;
 };
 
-//Infomation記事の詳細記事を取得
-export const getInfoDetail = async (
+//tutorial記事の詳細記事を取得
+export const getTutorialDetail = async (
+  endpoint: string,
   contentId: string,
   queries?: MicroCMSQueries,
 ) => {
-  const detailData = await client.getListDetail<Info>({
-    endpoint: 'informations',
+  const detailData = await client.getListDetail<Tutorial>({
+    endpoint,
     contentId,
     queries,
   });
