@@ -1,6 +1,6 @@
 import type { Tutorial } from '@/libs/microcms';
-import Image from 'next/image';
 import Link from 'next/link';
+import { IoReaderOutline } from 'react-icons/io5';
 
 type Props = {
   tutorials: Tutorial[];
@@ -12,46 +12,27 @@ export default function Card({ tutorials }: Props) {
   }
   return (
     <div className='bg-white px-4 py-6 sm:py-8 lg:py-12'>
-      <div className='grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-2 xl:grid-cols-2 xl:gap-8'>
+      <div className='grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:gap-8'>
         {tutorials.map((tutorial) => (
           <div
             key={tutorial.id}
-            className='flex flex-col items-center overflow-hidden rounded-lg border border-gray-300 md:flex-row'
+            className='max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm'
           >
+            <IoReaderOutline className='h-17 w-7' />
+            <Link href={`/tutorial/${tutorial.category.id}/${tutorial.id}`}>
+              <h3 className='mb-2 font-bold text-2xl text-gray-900 hover:underline'>
+                {tutorial.title}
+              </h3>
+            </Link>
+            <p className='mb-3 font-normal text-gray-500 dark:text-gray-400'>
+              {tutorial.description}
+            </p>
             <Link
               href={`/tutorial/${tutorial.category.id}/${tutorial.id}`}
-              className='group relative block h-48 w-full shrink-0 self-start overflow-hidden md:h-full md:w-32 lg:w-48'
+              className='inline-flex items-center font-bold text-blue-600 hover:underline'
             >
-              <Image
-                src='/moldpack_mp-2.jpeg'
-                width={192}
-                height={192}
-                alt='画像の説明'
-                className='absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110'
-              />
+              もっと見る
             </Link>
-            <div className='flex flex-col gap-2 p-4 lg:p-6'>
-              <span className='text-gray-400 text-sm'>
-                {tutorial.category.name}
-              </span>
-              <h2 className='font-bold text-xl'>
-                <Link
-                  href={`/tutorial/${tutorial.category.id}/${tutorial.id}`}
-                  className='transition duration-100 hover:text-indigo-500 active:text-indigo-600'
-                >
-                  {tutorial.title}
-                </Link>
-              </h2>
-              <p className='text-gray-500'>{tutorial.description}</p>
-              <div>
-                <Link
-                  href={`/tutorial/${tutorial.category.id}/${tutorial.id}`}
-                  className='font-semibold text-blue-500 transition duration-100 hover:text-blue-600 hover:underline'
-                >
-                  もっと読む
-                </Link>
-              </div>
-            </div>
           </div>
         ))}
       </div>
