@@ -4,13 +4,14 @@ import Link from 'next/link';
 
 type Props = {
   params: Promise<{
-    id: string;
+    categoryId: string;
+    contentId: string;
   }>;
 };
 
 export default async function Page({ params }: Props) {
-  const { id } = await params;
-  const data = await getTutorialDetail('rakuraku', id);
+  const { categoryId, contentId } = await params;
+  const data = await getTutorialDetail(categoryId, contentId);
   return (
     <>
       <h1 className='py-12 text-center font-bold text-5xl'>{data.title}</h1>
