@@ -27,9 +27,9 @@ export default async function Page({ params }: Props) {
       <div
         // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
         dangerouslySetInnerHTML={{ __html: data.body }}
-        className='prose max-w-none'
+        className='prose mx-auto max-w-screen-md'
       />
-      <div className='p-12'>
+      <div className='flex justify-center p-12'>
         <Link href={`/tutorial/${data.category.id}`}>
           <Button type='button'>{`${data.category.name}一覧へ`}</Button>
         </Link>
