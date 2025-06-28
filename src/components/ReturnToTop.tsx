@@ -30,14 +30,14 @@ export default function ReturnToTop() {
 
   return (
     <div
-      className={`fixed bottom-10 right-10 ${isVisible ? 'block' : 'hidden'}`}
+      className={`fixed right-10 bottom-10 ${isVisible ? 'block' : 'hidden'}`}
     >
       <button
         type='button'
         onClick={scrollTop}
-        className='bg-blue-600 text-white p-3 rounded-full cursor-pointer'
+        className='cursor-pointer rounded-full bg-blue-600 p-3 text-white'
       >
-        <FaArrowUp className='w-10 h-10' />
+        <FaArrowUp className='h-10 w-10' />
       </button>
     </div>
   );
