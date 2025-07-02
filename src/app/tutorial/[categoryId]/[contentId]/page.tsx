@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button';
+import ReturnToTop from '@/components/ReturnToTop';
 import { getTutorialDetail } from '@/libs/microcms';
 import Link from 'next/link';
 
@@ -34,6 +35,7 @@ export default async function Page({ params }: Props) {
           <Button type='button'>{`${data.category.name}一覧へ`}</Button>
         </Link>
       </div>
+      <ReturnToTop />
     </>
   );
 }
