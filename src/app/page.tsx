@@ -1,5 +1,5 @@
 import SectionHeader from '@/components/SectionHeader';
-import { pageLinks } from '@/const/pagelinks';
+import { CONTENT_TYPES_ARRAY } from '@/libs/microcms';
 import Link from 'next/link';
 
 export default function Home() {
@@ -14,20 +14,17 @@ export default function Home() {
       <section className=''>
         <div className='flex flex-col py-12'>
           <div className='divide-y divide-gray-300'>
-            {pageLinks.map((link) => (
+            {CONTENT_TYPES_ARRAY.map((link) => (
               <div
-                key={link.title}
+                key={link.name}
                 className='mx-auto grid grid-cols-4 justify-center space-y-8 p-8 lg:space-y-0'
               >
-                <div className='col-span-full flex items-center justify-center lg:col-span-1'>
-                  {link.logo && <link.logo className='h-16 w-16' />}
-                </div>
                 <div className='col-span-full flex flex-col justify-center text-center lg:col-span-3 lg:text-left'>
                   <Link
-                    href={link.path}
+                    href={link.endpoint}
                     className='font-bold text-2xl text-blue-500 hover:text-blue-600 hover:underline'
                   >
-                    {link.title}
+                    {link.name}
                   </Link>
                   <span className='mt-4 text-gray-700'>{link.description}</span>
                 </div>

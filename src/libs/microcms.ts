@@ -18,16 +18,44 @@ export const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
+// エンドポイントの定義（オブジェクト形式 - 推奨）
+export const CONTENT_TYPES = {
+  rakuraku: {
+    endpoint: 'rakuraku',
+    name: '楽楽精算',
+    description: '楽楽精算に関する記事',
+  },
+  aiseminer: {
+    endpoint: 'aiseminer',
+    name: 'AI勉強会',
+    description: 'AI勉強会に関する記事',
+  },
+  later: {
+    endpoint: 'later',
+    name: '未定',
+    description: '未定のコンテンツ',
+  },
+} as const;
+
+export type ContentType = keyof typeof CONTENT_TYPES;
+
+// 有効なコンテンツタイプかチェック
+export const isValidContentType = (type: string): type is ContentType => {
+  return Object.prototype.hasOwnProperty.call(CONTENT_TYPES, type);
+};
+
+// 配列形式も提供（一覧表示などで便利）
+export const CONTENT_TYPES_ARRAY = Object.entries(CONTENT_TYPES).map(
+  ([key, value]) => ({
+    key,
+    ...value,
+  }),
+);
+
 export type Tutorial = {
   title: string;
   description: string;
   body: string;
-  category: Category;
-} & MicroCMSContentId &
-  MicroCMSDate;
-
-export type Category = {
-  name: string;
 } & MicroCMSContentId &
   MicroCMSDate;
 
@@ -51,19 +79,6 @@ export const getTutorialDetail = async (
 ) => {
   const detailData = await client.getListDetail<Tutorial>({
     endpoint,
-    contentId,
-    queries,
-  });
-  return detailData;
-};
-
-//カテゴリーを取得
-export const getCategoryDetail = async (
-  contentId: string,
-  queries?: MicroCMSQueries,
-) => {
-  const detailData = await client.getListDetail<Category>({
-    endpoint: 'categories',
     contentId,
     queries,
   });
