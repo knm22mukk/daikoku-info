@@ -111,7 +111,7 @@ export default async function ContentDetailPage({ params }: Props) {
 
           <div className='flex items-center gap-4 text-gray-600 text-sm'>
             <time>
-              公開日:{' '}
+              公開日:
               {new Date(
                 article.publishedAt || article.createdAt,
               ).toLocaleDateString('ja-JP')}

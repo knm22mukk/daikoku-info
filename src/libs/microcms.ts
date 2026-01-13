@@ -23,12 +23,12 @@ export const CONTENT_TYPES = {
   rakuraku: {
     endpoint: 'rakuraku',
     name: '楽楽精算',
-    description: '楽楽精算に関する記事',
+    description: '楽楽精算の作業手順や注意事項についての記事一覧',
   },
   aiseminer: {
     endpoint: 'aiseminer',
     name: 'AI勉強会',
-    description: 'AI勉強会に関する記事',
+    description: 'AIの勉強会で使用した資料や情報共有の記事一覧',
   },
   later: {
     endpoint: 'later',

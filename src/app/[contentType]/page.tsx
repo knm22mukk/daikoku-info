@@ -1,3 +1,4 @@
+import { Button } from '@/components/Button';
 import SectionHeader from '@/components/SectionHeader';
 import {
   CONTENT_TYPES,
@@ -54,7 +55,7 @@ export default async function ContentListPage({ params, searchParams }: Props) {
   const page = resolvedSearchParams.page
     ? Number.parseInt(resolvedSearchParams.page as string)
     : 1;
-  const limit = 10;
+  const limit = 24;
 
   // 記事一覧を取得
   const { contents, totalCount } = await getTutorialList(config.endpoint, {
@@ -75,9 +76,12 @@ export default async function ContentListPage({ params, searchParams }: Props) {
       {/* 記事一覧 */}
       <div className='space-y-6'>
         {contents.length === 0 ? (
-          <p className='py-12 text-center text-gray-500'>
-            記事がまだありません
-          </p>
+          <div className='py-12 text-center'>
+            <p className='text-gray-500'>記事がまだありません</p>
+            <Button type='button'>
+              <Link href='/'>トップに戻る</Link>
+            </Button>
+          </div>
         ) : (
           <div className='grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4'>
             {contents.map((tutorial) => (
