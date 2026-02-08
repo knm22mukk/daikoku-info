@@ -55,6 +55,9 @@ export const CONTENT_TYPES_ARRAY = Object.entries(CONTENT_TYPES).map(
 export type Tutorial = {
   title: string;
   description: string;
+  image: {
+    url: string;
+  };
   body: string;
 } & MicroCMSContentId &
   MicroCMSDate;

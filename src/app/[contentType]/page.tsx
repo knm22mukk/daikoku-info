@@ -1,4 +1,6 @@
+import ArticleCard from '@/components/ArticleCard';
 import { Button } from '@/components/Button';
+import Pagination from '@/components/Pagination';
 import SectionHeader from '@/components/SectionHeader';
 import {
   CONTENT_TYPES,
@@ -7,7 +9,6 @@ import {
 } from '@/libs/microcms';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { IoReaderOutline } from 'react-icons/io5';
 
 type Props = {
   params: Promise<{
@@ -83,59 +84,25 @@ export default async function ContentListPage({ params, searchParams }: Props) {
             </Button>
           </div>
         ) : (
-          <div className='grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4'>
-            {contents.map((tutorial) => (
-              <div
-                key={tutorial.id}
-                className='max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm'
-              >
-                <IoReaderOutline className='h-17 w-7' />
-                <Link href={`/${contentType}/${tutorial.id}`}>
-                  <h3 className='mb-2 font-bold text-2xl text-gray-900 hover:underline'>
-                    {tutorial.title}
-                  </h3>
-                </Link>
-                <p className='mb-3 font-normal text-gray-500 dark:text-gray-400'>
-                  {tutorial.description}
-                </p>
-                <Link
-                  href={`/${contentType}/${tutorial.id}`}
-                  className='inline-flex items-center font-bold text-blue-600 hover:underline'
-                >
-                  もっと見る
-                </Link>
-              </div>
+          <div className='mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+            {contents.map((article) => (
+              <ArticleCard
+                key={article.id}
+                article={article}
+                contentType={contentType}
+              />
             ))}
           </div>
         )}
       </div>
 
-      {/* ページネーション */}
-      {totalPages > 1 && (
-        <div className='mt-8 flex justify-center gap-2'>
-          {page > 1 && (
-            <Link
-              href={`/${contentType}?page=${page - 1}`}
-              className='rounded border px-4 py-2 hover:bg-gray-100'
-            >
-              前へ
-            </Link>
-          )}
-
-          <span className='px-4 py-2'>
-            {page} / {totalPages}
-          </span>
-
-          {page < totalPages && (
-            <Link
-              href={`/${contentType}?page=${page + 1}`}
-              className='rounded border px-4 py-2 hover:bg-gray-100'
-            >
-              次へ
-            </Link>
-          )}
-        </div>
-      )}
+      <div className='py-12'>
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          basePath={`/${contentType}`}
+        />
+      </div>
     </main>
   );
 }

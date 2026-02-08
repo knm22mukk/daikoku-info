@@ -1,17 +1,17 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FaArrowUp } from 'react-icons/fa6';
 
 export default function ReturnToTop() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const toggleVisiblity = () => {
+  const toggleVisiblity = useCallback(() => {
     if (window.pageYOffset > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-  };
+  }, []);
 
   const scrollTop = () => {
     window.scrollTo({
@@ -20,13 +20,12 @@ export default function ReturnToTop() {
     });
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     window.addEventListener('scroll', toggleVisiblity);
     return () => {
       window.removeEventListener('scroll', toggleVisiblity);
     };
-  }, []);
+  }, [toggleVisiblity]);
 
   return (
     <div

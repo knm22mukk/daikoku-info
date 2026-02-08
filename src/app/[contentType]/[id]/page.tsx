@@ -5,6 +5,8 @@ import {
   getTutorialList,
   isValidContentType,
 } from '@/libs/microcms';
+import { formatDate } from '@/libs/utils';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -76,6 +78,7 @@ export default async function ContentDetailPage({ params }: Props) {
 
   // 記事詳細を取得
   let article: Tutorial;
+
   try {
     article = await getTutorialDetail(config.endpoint, id);
   } catch {
@@ -84,7 +87,6 @@ export default async function ContentDetailPage({ params }: Props) {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      {/* パンくずリスト */}
       <nav className='mb-8 text-sm'>
         <ol className='flex items-center gap-2 text-gray-600'>
           <li>
@@ -103,40 +105,29 @@ export default async function ContentDetailPage({ params }: Props) {
         </ol>
       </nav>
 
-      {/* 記事コンテンツ */}
-      <article className='mx-auto max-w-3xl'>
-        {/* ヘッダー */}
-        <header className='mb-8'>
+      <article className='mb-12'>
+        {article.image ? (
+          <Image
+            src={article.image.url}
+            alt={article.title}
+            width={1280}
+            height={720}
+          />
+        ) : (
           <h1 className='mb-4 font-bold text-4xl'>{article.title}</h1>
+        )}
 
-          <div className='flex items-center gap-4 text-gray-600 text-sm'>
-            <time>
-              公開日:
-              {new Date(
-                article.publishedAt || article.createdAt,
-              ).toLocaleDateString('ja-JP')}
-            </time>
-            {article.updatedAt && article.updatedAt !== article.createdAt && (
-              <time>
-                更新日:{' '}
-                {new Date(article.updatedAt).toLocaleDateString('ja-JP')}
-              </time>
-            )}
-          </div>
+        <div className='flex items-center gap-4 text-gray-600 text-sm py-12'>
+          <p>公開日：{formatDate(article.publishedAt || article.createdAt)}</p>
+          {article.updatedAt && <p>更新日：{formatDate(article.updatedAt)}</p>}
+        </div>
 
-          {article.description && (
-            <p className='mt-4 text-gray-700 text-lg'>{article.description}</p>
-          )}
-        </header>
-
-        {/* 本文 */}
         <div
           className='prose prose-lg max-w-none'
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: microCMSからの信頼できるHTMLのみ出力
           dangerouslySetInnerHTML={{ __html: article.body }}
         />
 
-        {/* 戻るリンク */}
         <div className='mt-12 border-t pt-8'>
           <Link
             href={`/${contentType}`}

@@ -2,6 +2,7 @@ type Props = {
   type: 'button' | 'submit';
   children: React.ReactNode;
   onClick?: () => void;
+  ariaLabel?: string;
 };
 
 export function Button({ type, children, onClick }: Props) {
@@ -16,12 +17,12 @@ export function Button({ type, children, onClick }: Props) {
   );
 }
 
-export function IconButton({ type, children }: Props) {
+export function IconButton({ type, children, ariaLabel }: Props) {
   return (
     <button
       type={type}
       className='inline-flex cursor-pointer items-center rounded-md bg-blue-500 p-2.5 text-center font-bold text-md text-white hover:bg-blue-600'
-      aria-label='ボタンの説明'
+      aria-label={ariaLabel || 'ボタン'}
     >
       {children}
     </button>
